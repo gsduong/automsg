@@ -56,6 +56,7 @@ def run():
 				driver.get(inbox_url)
 				t = driver.find_element_by_name("body")
 				if t:
+					print("Sending %(first)d of %(second)d messages ..." % {"first": idx + 1, "second": len(urls)})
 					t.send_keys(message)
 					send_btn = driver.find_element_by_name('send')
 					send_btn.click()
