@@ -51,9 +51,11 @@ def run():
 		print("Logged in as " + username)
 		for idx, item in enumerate(urls):
 			driver.get(item['mbasic_url'])
+			time.sleep(3)
 			inbox_url = driver.find_element_by_xpath("//a[contains(@href,'messages/thread')]").get_attribute('href')
 			if inbox_url:
 				driver.get(inbox_url)
+				time.sleep(3)
 				t = driver.find_element_by_name("body")
 				if t:
 					print("Sending %(first)d of %(second)d messages ..." % {"first": idx + 1, "second": len(urls)})
@@ -79,6 +81,7 @@ def run():
   		output.close()
 	else:
 		print("Failed to login for: " + username)
+	driver.quit()
 	return
 if __name__ == '__main__':
     run()
