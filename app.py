@@ -60,7 +60,7 @@ def run():
 					send_btn.click()
 					time.sleep(3)
 					if "send_success" in driver.current_url:
-						print(username + " sent a message to " + item['fb_id'])
+						print(strftime("%Y-%m-%d-%H-%M-%S", gmtime()) + ": " + username + " sent a message to " + item['fb_id'])
 						results.append(item['mbasic_url'] + "," + "success")
 					else:
 						print("Failed to send from: " + username + " to: " + item['fb_id'])

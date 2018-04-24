@@ -2,3 +2,4 @@ urls.txt
 result/*.txt
 message.txt
 *.log
+*.pyc
