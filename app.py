@@ -19,6 +19,7 @@ def run():
 	content = [x.strip() for x in content]
 	with open(MSG, 'r') as content_file:
 	    message = content_file.read()
+	message = unicode(message, "utf-8")
 	urls = []
 	for url in content:
 		original_url = url
