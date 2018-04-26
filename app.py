@@ -51,28 +51,32 @@ def run():
 		print("Logged in as " + username)
 		for idx, item in enumerate(urls):
 			driver.get(item['mbasic_url'])
-			time.sleep(3)
+			time.sleep(4)
 			inbox_url = driver.find_element_by_xpath("//a[contains(@href,'messages/thread')]").get_attribute('href')
 			if inbox_url:
 				driver.get(inbox_url)
-				time.sleep(3)
+				time.sleep(4)
 				t = driver.find_element_by_name("body")
 				if t:
+					print("Current URL: " + driver.current_url)
 					print("Sending %(first)d of %(second)d messages ..." % {"first": idx + 1, "second": len(urls)})
 					t.send_keys(message)
 					send_btn = driver.find_element_by_name('send')
 					send_btn.click()
-					time.sleep(3)
+					time.sleep(4)
 					if "send_success" in driver.current_url:
 						print(strftime("%Y-%m-%d-%H-%M-%S", gmtime()) + ": " + username + " sent a message to " + item['fb_id'])
 						results.append(item['mbasic_url'] + "," + "success")
 					else:
+						print("Current URL: " + driver.current_url)
 						print("Failed to send from: " + username + " to: " + item['fb_id'])
 						results.append(item['mbasic_url'] + "," + "failed")
 				else:
+					print("Current URL: " + driver.current_url)
 					print("Textbox not found when sending from: " + username + " to: " + item['fb_id'])
 					results.append(item['mbasic_url'] + "," + "failed")
 			else:
+				print("Current URL: " + driver.current_url)
 				print("Not found mbasic_url when sending from: " + username + " to: " + item['fb_id'])
 				results.append(item['mbasic_url'] + "," + "failed")
 		output = open("result/" + username + "_" + time_string + ".txt", 'w')
